@@ -15,13 +15,15 @@ builds:
       - arm64
 
 archives:
-  - format: tar.gz
+  - formats:
+      - tar.gz
     name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
 
 brews:
   - repository:
       owner: hisaju
       name: homebrew-tap
+      token: "{{ .Env.HOMEBREW_TAP_GITHUB_TOKEN }}"
     homepage: "https://github.com/hisaju/silaute"
     description: "素人AIアシスタント — Claude Codeパロディ版CLI"
     license: "MIT"
