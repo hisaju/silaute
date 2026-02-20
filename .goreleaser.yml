@@ -1,0 +1,35 @@
+version: 2
+
+builds:
+  - main: ./cmd/silaute/
+    binary: silaute
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w -X main.version={{.Version}}
+    goos:
+      - darwin
+      - linux
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - format: tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}"
+
+brews:
+  - repository:
+      owner: hisaju
+      name: homebrew-tap
+    homepage: "https://github.com/hisaju/silaute"
+    description: "素人AIアシスタント — Claude Codeパロディ版CLI"
+    license: "MIT"
+    install: |
+      bin.install "silaute"
+
+checksum:
+  name_template: "checksums.txt"
+
+changelog:
+  sort: asc
